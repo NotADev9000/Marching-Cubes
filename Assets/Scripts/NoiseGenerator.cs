@@ -21,8 +21,6 @@ public class NoiseGenerator : MonoBehaviour
     [SerializeField] private MeshGenerator _chunk;
 
     private ComputeBuffer _weightsBuffer;
-    // Unity throws a fit if you try to call a compute shader from OnValidate so we need to do it in Update
-    private bool _doValidateBehaviour = false;
 
     private void Awake()
     {
@@ -34,20 +32,11 @@ public class NoiseGenerator : MonoBehaviour
         ReleaseBuffers();
     }
 
-    private void Update()
-    {
-        if (_doValidateBehaviour)
-        {
-            _chunk.Execute();
-            _doValidateBehaviour = false;
-        }
-    }
-
     private void OnValidate()
     {
         if (EditorApplication.isPlaying && _chunk != null)
         {
-            _doValidateBehaviour = true;
+            _chunk.SettingsUpdated = true;
         }
     }
 
