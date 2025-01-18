@@ -20,15 +20,15 @@ void GenerateNoise(uint3 id : SV_DispatchThreadID)
     noise.frequency = _Frequency;
     noise.octaves = _Octaves;
 
-    // PLANE
-    float3 pos = id * _NoiseScale;
-    float ground = -pos.y + (_GroundPercent * _ChunkSize);
-    float n = ground + fnlGetNoise3D(noise, pos.x, pos.y, pos.z) * _Amplitude;
-    _Weights[indexFromCoord(id.x, id.y, id.z)] = n;
-
-    // SPHERE
-    // float3 pos = id * _NoiseScale * 1 - _ChunkSize/2;
-    // float radiusAndLength = 1 - length(pos);
-    // float n = radiusAndLength + fnlGetNoise3D(noise, pos.x, pos.y, pos.z) * _Amplitude;
+    // //PLANE
+    // float3 pos = id * _NoiseScale;
+    // float ground = -pos.y + (_GroundPercent * _ChunkSize);
+    // float n = ground + fnlGetNoise3D(noise, pos.x, pos.y, pos.z) * _Amplitude;
     // _Weights[indexFromCoord(id.x, id.y, id.z)] = n;
+
+    //SPHERE
+    float3 pos = id * _NoiseScale * 1 - _ChunkSize/2;
+    float radiusAndLength = 1 - length(pos);
+    float n = radiusAndLength + fnlGetNoise3D(noise, pos.x, pos.y, pos.z) * _Amplitude;
+    _Weights[indexFromCoord(id.x, id.y, id.z)] = n;
 }
