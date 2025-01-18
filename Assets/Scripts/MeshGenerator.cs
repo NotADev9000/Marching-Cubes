@@ -133,9 +133,16 @@ public class MeshGenerator : MonoBehaviour
 
     private void CreateBuffers()
     {
-        _trianglesBuffer = new ComputeBuffer(5 * (GridMetrics.PointsPerChunk * GridMetrics.PointsPerChunk * GridMetrics.PointsPerChunk), Triangle.SizeOf, ComputeBufferType.Append);
-        _trianglesCountBuffer = new ComputeBuffer(1, sizeof(int), ComputeBufferType.Raw);
+        _trianglesBuffer = new ComputeBuffer(5 * (
+                (GridMetrics.PointsPerChunk - 1) *
+                (GridMetrics.PointsPerChunk - 1) *
+                (GridMetrics.PointsPerChunk - 1)
+            ), Triangle.SizeOf, ComputeBufferType.Append);
+        Debug.Log("Triangle buffer size: " + _trianglesBuffer.count);
+        _trianglesCountBuffer = new ComputeBuffer(1, sizeof(uint), ComputeBufferType.Raw);
+        Debug.Log("Triangle count buffer size: " + _trianglesCountBuffer.count);
         _weightsBuffer = new ComputeBuffer(GridMetrics.PointsPerChunk * GridMetrics.PointsPerChunk * GridMetrics.PointsPerChunk, sizeof(float));
+        Debug.Log("Weights buffer size: " + _weightsBuffer.count);
     }
 
     private void ReleaseBuffers()
