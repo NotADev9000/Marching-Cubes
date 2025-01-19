@@ -30,12 +30,9 @@ void GenerateNoise(uint3 id : SV_DispatchThreadID)
     noise.weighted_strength = _WeightStrength;
     noise.ping_pong_strength = _WeightStrength;
 
-    // PLANE
-    // don't scale y value to prevent the mesh moving up and down
-    float3 pos = float3(id.x * _NoiseScale, id.y, id.z * _NoiseScale);
-    float ground = -pos.y + (_GroundPercent * _ChunkSize);
-    float n = ground + fnlGetNoise3D(noise, pos.x, pos.y, pos.z) * _Amplitude;
-    n *= _NoiseWeight;
-    n = sign(n) * pow(abs(n), 2);
+    //SPHERE
+    float3 pos = id * _NoiseScale * 1 - _ChunkSize/2;
+    float radiusAndLength = 1 - length(pos);
+    float n = radiusAndLength + fnlGetNoise3D(noise, pos.x, pos.y, pos.z) * _Amplitude;
     _Weights[indexFromCoord(id.x, id.y, id.z)] = n;
 }

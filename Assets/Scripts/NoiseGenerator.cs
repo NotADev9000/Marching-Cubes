@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshGenerator))]
 public class NoiseGenerator : MonoBehaviour
 {
     [Header("Noise Shader")]
@@ -21,14 +22,16 @@ public class NoiseGenerator : MonoBehaviour
     [SerializeField] float lacunarity = 2f;
     [SerializeField] float gain = 0.5f;
 
-    [Space()]
-    [Header("Chunk to Update")]
-    [SerializeField] private MeshGenerator _chunk;
+    // Components:
+    private MeshGenerator _meshGenerator;
 
+    // Buffers:
     private ComputeBuffer _weightsBuffer;
 
     private void Awake()
     {
+        _meshGenerator = GetComponent<MeshGenerator>();
+
         CreateBuffers();
     }
 
@@ -39,9 +42,9 @@ public class NoiseGenerator : MonoBehaviour
 
     private void OnValidate()
     {
-        if (EditorApplication.isPlaying && _chunk != null)
+        if (EditorApplication.isPlaying && _meshGenerator != null)
         {
-            _chunk.SettingsUpdated = true;
+            _meshGenerator.SettingsUpdated = true;
         }
     }
 
@@ -58,7 +61,7 @@ public class NoiseGenerator : MonoBehaviour
         NoiseShader.SetFloat("_Amplitude", amplitude);
         NoiseShader.SetFloat("_Frequency", frequency);
         NoiseShader.SetInt("_Octaves", octaves);
-        NoiseShader.SetFloat("_GroundPercent", groundPercent);
+        NoiseShader.SetFloat("_GroundPercent", groundPercent / transform.localScale.y);
         NoiseShader.SetFloat("_NoiseWeight", noiseWeight);
         NoiseShader.SetFloat("_WeightStrength", weightStrength);
         NoiseShader.SetFloat("_Lacunarity", lacunarity);

@@ -45,7 +45,7 @@ Shader "Custom/Terrain"
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             // Albedo comes from a texture tinted by color
-            float h = smoothstep(0, GridY, IN.worldPos.y);
+            float h = smoothstep(-5, GridY+5, IN.worldPos.y);
             float3 tex = tex2D(terrain, h);
             o.Albedo = tex;
             // Metallic and smoothness come from slider variables
