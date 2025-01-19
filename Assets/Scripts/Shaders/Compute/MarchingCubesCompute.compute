@@ -1,7 +1,7 @@
 ﻿#pragma kernel March
 
 #include "Includes\MarchingTable.hlsl"
-#include "Includes\MetricsCompute.compute"
+#include "Includes\MetricsCompute.hlsl"
 
 RWStructuredBuffer<float> _Weights;
 
@@ -21,7 +21,7 @@ float3 interp(float3 edgeVertex1, float valueAtVertex1, float3 edgeVertex2, floa
 [numthreads(numThreads, numThreads, numThreads)]
 void March(uint3 id : SV_DispatchThreadID)
 {
-    if (id.x >= _ChunkSize - 1 || id.y >= _ChunkSize - 1 || id.z >= _ChunkSize - 1)
+    if (id.x >= (uint)_ChunkSize - 1 || id.y >= (uint)_ChunkSize - 1 || id.z >= (uint)_ChunkSize - 1)
     {
         return;
     }

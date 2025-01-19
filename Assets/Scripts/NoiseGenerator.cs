@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshGenerator))]
 public class NoiseGenerator : MonoBehaviour
 {
     [Header("Noise Shader")]
@@ -10,20 +11,27 @@ public class NoiseGenerator : MonoBehaviour
 
     [Space()]
     [Header("Noise Settings")]
+    [SerializeField] int seed = 1337;
     [SerializeField] float noiseScale = 0.08f;
     [SerializeField] float amplitude = 200;
-    [SerializeField] float frequency = 0.004f;
+    [SerializeField, Range(0f, 0.1f)] float frequency = 0.02f;
     [SerializeField] int octaves = 6;
     [SerializeField, Range(0f, 1f)] float groundPercent = 0.2f;
+    [SerializeField] float noiseWeight = 1f;
+    [SerializeField] float weightStrength = 0f;
+    [SerializeField] float lacunarity = 2f;
+    [SerializeField] float gain = 0.5f;
 
-    [Space()]
-    [Header("Chunk to Update")]
-    [SerializeField] private MeshGenerator _chunk;
+    // Components:
+    private MeshGenerator _meshGenerator;
 
+    // Buffers:
     private ComputeBuffer _weightsBuffer;
 
     private void Awake()
     {
+        _meshGenerator = GetComponent<MeshGenerator>();
+
         CreateBuffers();
     }
 
@@ -34,9 +42,9 @@ public class NoiseGenerator : MonoBehaviour
 
     private void OnValidate()
     {
-        if (EditorApplication.isPlaying && _chunk != null)
+        if (EditorApplication.isPlaying && _meshGenerator != null)
         {
-            _chunk.SettingsUpdated = true;
+            _meshGenerator.SettingsUpdated = true;
         }
     }
 
@@ -47,12 +55,17 @@ public class NoiseGenerator : MonoBehaviour
 
         NoiseShader.SetBuffer(0, "_Weights", _weightsBuffer);
 
+        NoiseShader.SetInt("_Seed", seed);
         NoiseShader.SetInt("_ChunkSize", GridMetrics.PointsPerChunk);
         NoiseShader.SetFloat("_NoiseScale", noiseScale);
         NoiseShader.SetFloat("_Amplitude", amplitude);
         NoiseShader.SetFloat("_Frequency", frequency);
         NoiseShader.SetInt("_Octaves", octaves);
-        NoiseShader.SetFloat("_GroundPercent", groundPercent);
+        NoiseShader.SetFloat("_GroundPercent", groundPercent / transform.localScale.y);
+        NoiseShader.SetFloat("_NoiseWeight", noiseWeight);
+        NoiseShader.SetFloat("_WeightStrength", weightStrength);
+        NoiseShader.SetFloat("_Lacunarity", lacunarity);
+        NoiseShader.SetFloat("_Gain", gain);
 
         int numThreadGroups = Mathf.CeilToInt(GridMetrics.PointsPerChunk / GridMetrics.NumThreads);
         NoiseShader.Dispatch(

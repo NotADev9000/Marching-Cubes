@@ -1,15 +1,20 @@
 ﻿#pragma kernel GenerateNoise
 
 #include "Includes\FastNoiseLite.compute"
-#include "Includes\MetricsCompute.compute"
+#include "Includes\MetricsCompute.hlsl"
 
 RWStructuredBuffer<float> _Weights;
 
+int _Seed;
 float _NoiseScale;
 float _Amplitude;
 float _Frequency;
 int _Octaves;
 float _GroundPercent;
+float _NoiseWeight;
+float _WeightStrength;
+float _Lacunarity;
+float _Gain;
 
 [numthreads(numThreads, numThreads, numThreads)]
 void GenerateNoise(uint3 id : SV_DispatchThreadID)
@@ -17,18 +22,17 @@ void GenerateNoise(uint3 id : SV_DispatchThreadID)
     fnl_state noise = fnlCreateState();
     noise.noise_type = FNL_NOISE_OPENSIMPLEX2;
     noise.fractal_type = FNL_FRACTAL_RIDGED;
+    noise.seed = _Seed;
     noise.frequency = _Frequency;
     noise.octaves = _Octaves;
+    noise.lacunarity = _Lacunarity;
+    noise.gain = _Gain;
+    noise.weighted_strength = _WeightStrength;
+    noise.ping_pong_strength = _WeightStrength;
 
-    // PLANE
-    float3 pos = id * _NoiseScale;
-    float ground = -pos.y + (_GroundPercent * _ChunkSize);
-    float n = ground + fnlGetNoise3D(noise, pos.x, pos.y, pos.z) * _Amplitude;
+    //SPHERE
+    float3 pos = id * _NoiseScale * 1 - _ChunkSize/2;
+    float radiusAndLength = 1 - length(pos);
+    float n = radiusAndLength + fnlGetNoise3D(noise, pos.x, pos.y, pos.z) * _Amplitude;
     _Weights[indexFromCoord(id.x, id.y, id.z)] = n;
-
-    // SPHERE
-    // float3 pos = id * _NoiseScale * 1 - _ChunkSize/2;
-    // float radiusAndLength = 1 - length(pos);
-    // float n = radiusAndLength + fnlGetNoise3D(noise, pos.x, pos.y, pos.z) * _Amplitude;
-    // _Weights[indexFromCoord(id.x, id.y, id.z)] = n;
 }
