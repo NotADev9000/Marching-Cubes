@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -65,13 +66,14 @@ public class MeshGenerator : MonoBehaviour
         Execute();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (SettingsUpdated)
         {
             Execute();
             SettingsUpdated = false;
         }
+        
     }
 
     private void OnValidate()

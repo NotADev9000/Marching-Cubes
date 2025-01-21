@@ -491,7 +491,7 @@ MonoBehaviour:
   Presets:
   - {fileID: 11400000, guid: 1c3b13e18d93f584db4ce717342a6e5a, type: 2}
   - {fileID: 11400000, guid: c5434242ef540ab4590a03c15e513a01, type: 2}
-  - {fileID: 11400000, guid: 7d431962d1b205049b7d49138ee45b69, type: 2}
+  - {fileID: 11400000, guid: bfe7ab521b522a3478f76ef4d7115fec, type: 2}
 --- !u!1001 &516381639002807467
 PrefabInstance:
   m_ObjectHideFlags: 0
