@@ -1,4 +1,7 @@
-﻿using UnityEditor;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshGenerator))]
@@ -16,6 +19,76 @@ public class NoiseGenerator : MonoBehaviour
     [SerializeField] float weightStrength = 0f;
     [SerializeField] float lacunarity = 2f;
     [SerializeField] float gain = 0.5f;
+
+    public int Seed
+    {
+        get { return seed; }
+        set
+        {
+            seed = value;
+            _meshGenerator.SettingsUpdated = true;
+        }
+    }
+
+    public float Amplitude
+    {
+        get { return amplitude; }
+        set
+        {
+            amplitude = value;
+            _meshGenerator.SettingsUpdated = true;
+        }
+    }
+
+    public float Frequency
+    {
+        get { return frequency; }
+        set
+        {
+            frequency = Mathf.Clamp(value, 0f, 0.1f);
+            _meshGenerator.SettingsUpdated = true;
+        }
+    }
+
+    public int Octaves
+    {
+        get { return octaves; }
+        set
+        {
+            octaves = Mathf.Max(1, value);
+            _meshGenerator.SettingsUpdated = true;
+        }
+    }
+
+    public float WeightStrength
+    {
+        get { return weightStrength; }
+        set
+        {
+            weightStrength = value;
+            _meshGenerator.SettingsUpdated = true;
+        }
+    }
+
+    public float Lacunarity
+    {
+        get { return lacunarity; }
+        set
+        {
+            lacunarity = Mathf.Max(1f, value);
+            _meshGenerator.SettingsUpdated = true;
+        }
+    }
+
+    public float Gain
+    {
+        get { return gain; }
+        set
+        {
+            gain = Mathf.Clamp01(value);
+            _meshGenerator.SettingsUpdated = true;
+        }
+    }
 
     // Components:
     private MeshGenerator _meshGenerator;
