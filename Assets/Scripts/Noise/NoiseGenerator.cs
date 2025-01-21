@@ -4,14 +4,24 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+public enum NoiseType : int
+{
+    OpenSimplex2 = 0,
+    OpenSimplex2S = 1,
+    Cellular = 2,
+    Perlin = 3,
+    CubicValue = 4,
+    Value = 5
+}
+
 [RequireComponent(typeof(MeshGenerator))]
 public class NoiseGenerator : MonoBehaviour
 {
     [Header("Noise Shader")]
     [SerializeField] protected ComputeShader NoiseShader;
 
-    [Space()]
-    [Header("Noise Settings")]
+    [Space()] [Header("Noise Settings")]
+    [SerializeField] NoiseType noiseType = NoiseType.Value;
     [SerializeField] int seed = 1337;
     [SerializeField] float amplitude = 5;
     [SerializeField, Range(0f, 0.1f)] float frequency = 0.02f;
@@ -20,6 +30,16 @@ public class NoiseGenerator : MonoBehaviour
     [SerializeField] float lacunarity = 2f;
     [SerializeField] float gain = 0.5f;
 
+    public NoiseType NoiseIndex
+    {
+        get { return noiseType; }
+        set
+        {
+            noiseType = value;
+            _meshGenerator.SettingsUpdated = true;
+        }
+    }
+    
     public int Seed
     {
         get { return seed; }
@@ -136,6 +156,7 @@ public class NoiseGenerator : MonoBehaviour
 
     protected virtual void PassNoiseSettingsToShader()
     {
+        NoiseShader.SetInt("_NoiseType", (int)noiseType);
         NoiseShader.SetInt("_ChunkSize", GridMetrics.PointsPerChunk);
         NoiseShader.SetInt("_Seed", seed);
         NoiseShader.SetFloat("_Amplitude", amplitude);

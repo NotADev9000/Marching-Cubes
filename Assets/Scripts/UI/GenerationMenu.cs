@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public enum PresetType
+public enum GenerationPresetType : int
 {
-    Base,
-    Example1,
+    PerfectSphere,
+    OnionPlanet,
     Example2
 }
 
@@ -34,6 +34,8 @@ public class GenerationMenu : MonoBehaviour
             _noiseGenerator = _currentGenerator.GetComponent<NoiseGenerator>();
         }
     }
+
+    public GenerationPreset[] Presets;
     
     private MeshGenerator _meshGenerator;
     private NoiseGenerator _noiseGenerator;
@@ -43,10 +45,12 @@ public class GenerationMenu : MonoBehaviour
     private VisualElement _panelElement;
     
     // Mesh Options
+    private EnumField _presetField;
     private EnumField _meshTypeField;
     private Slider _isoSlider;
     
     // Noise Options
+    private EnumField _noiseTypeField;
     private TextField _seedField;
     private Slider _noiseScaleSlider;
     private Slider _amplitudeSlider;
@@ -59,22 +63,23 @@ public class GenerationMenu : MonoBehaviour
     private Slider _gainSlider;
 
     private bool _isPanelHidden;
-    
-    // Templates
 
-    // Start is called before the first frame update
-    IEnumerator Start()
+    private void Awake()
     {
-        _rootElement = GetComponent<UIDocument>().rootVisualElement;
+                _rootElement = GetComponent<UIDocument>().rootVisualElement;
         
         _panelElement = _rootElement.Q<VisualElement>("Panel");
         
         // Mesh options
+        _presetField = _rootElement.Q<EnumField>("PresetEnumField");
+        _presetField.Init(GenerationPresetType.OnionPlanet);
         _isoSlider = _rootElement.Q<Slider>("IsoLevelSlider");
         _meshTypeField = _rootElement.Q<EnumField>("MeshTypeEnumField");
-        _meshTypeField.Init(MeshType.Sphere);
+        _meshTypeField.Init(MeshType.Terrain);
         
         // Noise options
+        _noiseTypeField = _rootElement.Q<EnumField>("NoiseTypeEnumField");
+        _noiseTypeField.Init(NoiseType.Value);
         _seedField = _rootElement.Q<TextField>("SeedField");
         _noiseScaleSlider = _rootElement.Q<Slider>("NoiseScaleSlider");
         _amplitudeSlider = _rootElement.Q<Slider>("AmplitudeSlider");
@@ -87,6 +92,8 @@ public class GenerationMenu : MonoBehaviour
         _gainSlider = _rootElement.Q<Slider>("GainSlider");
         
         // Mesh change events
+        _presetField.RegisterValueChangedCallback(SetPreset);
+        
         _meshTypeField.RegisterValueChangedCallback(evt =>
         {
             SphereGenerator.SetActive(true);
@@ -115,6 +122,11 @@ public class GenerationMenu : MonoBehaviour
         _isoSlider.RegisterValueChangedCallback((evt) =>
         {
             _meshGenerator.IsoLevel = evt.newValue;
+        });
+
+        _noiseTypeField.RegisterValueChangedCallback(evt =>
+        {
+            _noiseGenerator.NoiseIndex = (NoiseType)evt.newValue;
         });
         
         // Noise change events
@@ -170,11 +182,15 @@ public class GenerationMenu : MonoBehaviour
         {
             _noiseGenerator.Gain = evt.newValue;
         });
+    }
 
-        yield return null;
-        
+    // Start is called before the first frame update
+    void Start()
+    {
         // Initialise base values here
-        _meshTypeField.value = MeshType.Terrain;
+        _presetField.value = GenerationPresetType.PerfectSphere;
+        _presetField.value = GenerationPresetType.OnionPlanet;
+        _presetField.value = GenerationPresetType.PerfectSphere;
     }
 
     private void Update()
@@ -192,5 +208,34 @@ public class GenerationMenu : MonoBehaviour
 
             _isPanelHidden = !_isPanelHidden;
         }
+    }
+
+    private void SetPreset(ChangeEvent<Enum> presetEnum)
+    {
+        Debug.Log("Is this working");
+        GenerationPreset preset = Presets[(int)(GenerationPresetType)presetEnum.newValue];
+        
+        // Mesh Options
+        _meshTypeField.value = preset.Mesh;
+        _isoSlider.value = preset.IsoLevel;
+        
+        // Noise Options
+        _noiseTypeField.value = preset.Noise;
+        _seedField.value = preset.Seed.ToString();
+        _amplitudeSlider.value = preset.Amplitude;
+        _frequencySlider.value = preset.Frequency;
+        _octavesSlider.value = preset.Octaves;
+        _weightStrengthSlider.value = preset.WeightStrength;
+        _lacunaritySlider.value = preset.Lacunarity;
+        _gainSlider.value = preset.Gain;
+
+        if (preset.Mesh == MeshType.Sphere)
+        {
+            return;
+        }
+        
+        _groundPercentSlider.value = preset.GroundLevel;
+        _noiseWeightSlider.value = preset.NoiseWeight;
+        _noiseScaleSlider.value =  preset.NoiseScale;
     }
 }

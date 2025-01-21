@@ -200,7 +200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6498425276426831626, guid: 2fffa5e0632d372409d914e69f6f2dec, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8964319362638559529, guid: 2fffa5e0632d372409d914e69f6f2dec, type: 3}
       propertyPath: m_LocalPosition.x
@@ -490,7 +490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6498425276426831626, guid: 8fb4321c0138d6747bc08081ca2bd2dd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8964319362638559529, guid: 8fb4321c0138d6747bc08081ca2bd2dd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -601,6 +601,9 @@ MonoBehaviour:
   SphereGenerator: {fileID: 871133304}
   TerrainGenerator: {fileID: 1599528303}
   _currentGenerator: {fileID: 0}
+  Presets:
+  - {fileID: 11400000, guid: 1c3b13e18d93f584db4ce717342a6e5a, type: 2}
+  - {fileID: 11400000, guid: c5434242ef540ab4590a03c15e513a01, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
