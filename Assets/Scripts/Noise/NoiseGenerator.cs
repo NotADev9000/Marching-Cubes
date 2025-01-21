@@ -91,7 +91,7 @@ public class NoiseGenerator : MonoBehaviour
     }
 
     // Components:
-    private MeshGenerator _meshGenerator;
+    protected MeshGenerator _meshGenerator;
 
     // Buffers:
     private ComputeBuffer _weightsBuffer;

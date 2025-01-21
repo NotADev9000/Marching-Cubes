@@ -81,6 +81,10 @@ public class GenerationMenu : MonoBehaviour
         _frequencySlider = _rootElement.Q<Slider>("FrequencySlider");
         _octavesSlider = _rootElement.Q<Slider>("OctavesSlider");
         _groundPercentSlider = _rootElement.Q<Slider>("GroundPercentSlider");
+        _noiseWeightSlider = _rootElement.Q<Slider>("NoiseWeightSlider");
+        _weightStrengthSlider = _rootElement.Q<Slider>("WeightStrengthSlider");
+        _lacunaritySlider = _rootElement.Q<Slider>("LacunaritySlider");
+        _gainSlider = _rootElement.Q<Slider>("GainSlider");
         
         // Mesh change events
         _meshTypeField.RegisterValueChangedCallback(evt =>
@@ -92,10 +96,18 @@ public class GenerationMenu : MonoBehaviour
                 case MeshType.Sphere:
                     CurrentGenerator = SphereGenerator;
                     TerrainGenerator.SetActive(false);
+                    
+                    _noiseScaleSlider.AddToClassList("hidden");
+                    _groundPercentSlider.AddToClassList("hidden");
+                    _noiseWeightSlider.AddToClassList("hidden");
                     break;
                 case MeshType.Terrain:
                     CurrentGenerator = TerrainGenerator;
                     SphereGenerator.SetActive(false);
+                    
+                    _noiseScaleSlider.RemoveFromClassList("hidden");
+                    _groundPercentSlider.RemoveFromClassList("hidden");
+                    _noiseWeightSlider.RemoveFromClassList("hidden");
                     break;
             }
         });
@@ -113,7 +125,8 @@ public class GenerationMenu : MonoBehaviour
 
         _noiseScaleSlider.RegisterValueChangedCallback((evt) =>
         {
-            _noiseGenerator.NoiseScale = evt.newValue;
+            TerrainNoiseGenerator terrainNoiseGenerator = _noiseGenerator as TerrainNoiseGenerator;
+            terrainNoiseGenerator.NoiseScale = evt.newValue;
         });
 
         _amplitudeSlider.RegisterValueChangedCallback((evt) =>
@@ -133,12 +146,14 @@ public class GenerationMenu : MonoBehaviour
 
         _groundPercentSlider.RegisterValueChangedCallback((evt) =>
         {
-            _noiseGenerator.GroundPercent = evt.newValue;
+            TerrainNoiseGenerator terrainNoiseGenerator = _noiseGenerator as TerrainNoiseGenerator;
+            terrainNoiseGenerator.GroundLevel = evt.newValue;
         });
 
         _noiseWeightSlider.RegisterValueChangedCallback((evt) =>
         {
-            _noiseGenerator.NoiseWeight = evt.newValue;
+            TerrainNoiseGenerator terrainNoiseGenerator = _noiseGenerator as TerrainNoiseGenerator;
+            terrainNoiseGenerator.NoiseWeight = evt.newValue;
         });
 
         _weightStrengthSlider.RegisterValueChangedCallback((evt) =>
