@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -20,7 +20,8 @@ public class NoiseGenerator : MonoBehaviour
     [Header("Noise Shader")]
     [SerializeField] protected ComputeShader NoiseShader;
 
-    [Space()] [Header("Noise Settings")]
+    [Space()]
+    [Header("Noise Settings")]
     [SerializeField] NoiseType noiseType = NoiseType.Value;
     [SerializeField] int seed = 1337;
     [SerializeField] float amplitude = 5;
@@ -39,7 +40,7 @@ public class NoiseGenerator : MonoBehaviour
             _meshGenerator.SettingsUpdated = true;
         }
     }
-    
+
     public int Seed
     {
         get { return seed; }

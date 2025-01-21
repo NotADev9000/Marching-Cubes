@@ -23,7 +23,7 @@ public class GenerationMenu : MonoBehaviour
     public GameObject TerrainGenerator;
 
     public GameObject _currentGenerator;
-    
+
     public GameObject CurrentGenerator
     {
         get { return _currentGenerator; }
@@ -36,19 +36,19 @@ public class GenerationMenu : MonoBehaviour
     }
 
     public GenerationPreset[] Presets;
-    
+
     private MeshGenerator _meshGenerator;
     private NoiseGenerator _noiseGenerator;
-    
+
     private VisualElement _rootElement;
-    
+
     private VisualElement _panelElement;
-    
+
     // Mesh Options
     private EnumField _presetField;
     private EnumField _meshTypeField;
     private Slider _isoSlider;
-    
+
     // Noise Options
     private EnumField _noiseTypeField;
     private TextField _seedField;
@@ -66,17 +66,17 @@ public class GenerationMenu : MonoBehaviour
 
     private void Awake()
     {
-                _rootElement = GetComponent<UIDocument>().rootVisualElement;
-        
+        _rootElement = GetComponent<UIDocument>().rootVisualElement;
+
         _panelElement = _rootElement.Q<VisualElement>("Panel");
-        
+
         // Mesh options
         _presetField = _rootElement.Q<EnumField>("PresetEnumField");
         _presetField.Init(GenerationPresetType.OnionPlanet);
         _isoSlider = _rootElement.Q<Slider>("IsoLevelSlider");
         _meshTypeField = _rootElement.Q<EnumField>("MeshTypeEnumField");
         _meshTypeField.Init(MeshType.Terrain);
-        
+
         // Noise options
         _noiseTypeField = _rootElement.Q<EnumField>("NoiseTypeEnumField");
         _noiseTypeField.Init(NoiseType.Value);
@@ -90,10 +90,10 @@ public class GenerationMenu : MonoBehaviour
         _weightStrengthSlider = _rootElement.Q<Slider>("WeightStrengthSlider");
         _lacunaritySlider = _rootElement.Q<Slider>("LacunaritySlider");
         _gainSlider = _rootElement.Q<Slider>("GainSlider");
-        
+
         // Mesh change events
         _presetField.RegisterValueChangedCallback(SetPreset);
-        
+
         _meshTypeField.RegisterValueChangedCallback(evt =>
         {
             SphereGenerator.SetActive(true);
@@ -103,7 +103,7 @@ public class GenerationMenu : MonoBehaviour
                 case MeshType.Sphere:
                     CurrentGenerator = SphereGenerator;
                     TerrainGenerator.SetActive(false);
-                    
+
                     _noiseScaleSlider.AddToClassList("hidden");
                     _groundPercentSlider.AddToClassList("hidden");
                     _noiseWeightSlider.AddToClassList("hidden");
@@ -111,14 +111,14 @@ public class GenerationMenu : MonoBehaviour
                 case MeshType.Terrain:
                     CurrentGenerator = TerrainGenerator;
                     SphereGenerator.SetActive(false);
-                    
+
                     _noiseScaleSlider.RemoveFromClassList("hidden");
                     _groundPercentSlider.RemoveFromClassList("hidden");
                     _noiseWeightSlider.RemoveFromClassList("hidden");
                     break;
             }
         });
-            
+
         _isoSlider.RegisterValueChangedCallback((evt) =>
         {
             _meshGenerator.IsoLevel = evt.newValue;
@@ -128,7 +128,7 @@ public class GenerationMenu : MonoBehaviour
         {
             _noiseGenerator.NoiseIndex = (NoiseType)evt.newValue;
         });
-        
+
         // Noise change events
         _seedField.RegisterValueChangedCallback((evt) =>
         {
@@ -184,7 +184,6 @@ public class GenerationMenu : MonoBehaviour
         });
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         // Initialise base values here
@@ -214,11 +213,11 @@ public class GenerationMenu : MonoBehaviour
     {
         Debug.Log("Is this working");
         GenerationPreset preset = Presets[(int)(GenerationPresetType)presetEnum.newValue];
-        
+
         // Mesh Options
         _meshTypeField.value = preset.Mesh;
         _isoSlider.value = preset.IsoLevel;
-        
+
         // Noise Options
         _noiseTypeField.value = preset.Noise;
         _seedField.value = preset.Seed.ToString();
@@ -233,9 +232,9 @@ public class GenerationMenu : MonoBehaviour
         {
             return;
         }
-        
+
         _groundPercentSlider.value = preset.GroundLevel;
         _noiseWeightSlider.value = preset.NoiseWeight;
-        _noiseScaleSlider.value =  preset.NoiseScale;
+        _noiseScaleSlider.value = preset.NoiseScale;
     }
 }
