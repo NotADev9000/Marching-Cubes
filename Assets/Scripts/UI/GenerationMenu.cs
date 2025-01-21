@@ -8,7 +8,7 @@ public enum GenerationPresetType : int
 {
     PerfectSphere,
     OnionPlanet,
-    Example2
+    Islands
 }
 
 public enum MeshType
