@@ -37,6 +37,16 @@ public class MeshGenerator : MonoBehaviour
     // Unity throws a fit if you try to call a compute shader from OnValidate so we need to do it in Update
     public bool SettingsUpdated { get; set; } = false;
 
+    public float IsoLevel
+    {
+        get { return _isoLevel; }
+        set
+        {
+            _isoLevel = value;
+            SettingsUpdated = true;
+        }
+    }
+
     private void Awake()
     {
         _noiseGenerator = GetComponent<NoiseGenerator>();

@@ -1,19 +1,29 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/GenerationMenuStyle.uss?fileID=7433441132597879392&amp;guid=5c4e59d769c792a4284e9e7ab2282754&amp;type=3#GenerationMenuStyle" />
-    <ui:VisualElement name="Panel" style="justify-content: center; align-items: center; width: 100%; height: 100%; padding-top: 100px; padding-right: 100px; padding-bottom: 100px; padding-left: 100px;">
-        <ui:VisualElement name="Background" style="background-color: rgba(0, 0, 0, 0.59); width: 100%; height: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; flex-shrink: 1; flex-direction: row; justify-content: space-around; align-items: stretch;">
+    <ui:VisualElement name="Root" style="justify-content: center; align-items: center; width: 100%; height: 100%; padding-top: 100px; padding-right: 100px; padding-bottom: 100px; padding-left: 100px;">
+        <ui:VisualElement name="Panel" style="background-color: rgba(0, 0, 0, 0.59); width: 100%; height: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; flex-shrink: 1; flex-direction: row; justify-content: space-around; align-items: stretch;">
             <ui:VisualElement style="flex-grow: 1; flex-shrink: 0;">
                 <ui:Label tabindex="-1" text="Mesh Options" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MenuTitle" />
-                <ui:Slider label="Iso Level&#10;" high-value="100" show-input-field="true" name="IsoLevelSlider" class="GenerationSlider" />
+                <ui:EnumField label="Preset" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" name="PresetEnumField" />
+                <ui:EnumField label="Mesh Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" name="MeshTypeEnumField" />
+                <ui:Slider label="Iso Level&#10;" high-value="1" show-input-field="true" name="IsoLevelSlider" low-value="-1" class="GenerationSlider" />
             </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 1; flex-shrink: 0;">
                 <ui:Label tabindex="-1" text="Noise Options" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MenuTitle" />
-                <ui:Slider label="Noise Scale" high-value="100" show-input-field="true" name="NoiseScaleSlider" class="GenerationSlider" />
-                <ui:Slider label="Amplitude" high-value="100" show-input-field="true" name="AmplitudeSlider" class="GenerationSlider" />
-                <ui:Slider label="Frequency" high-value="100" show-input-field="true" name="FrequencySlider" class="GenerationSlider" />
-                <ui:Slider label="Octaves" high-value="100" show-input-field="true" name="OctavesSlider" class="GenerationSlider" />
-                <ui:Slider label="Ground Percent" high-value="100" show-input-field="true" name="GroundPercentSlider" class="GenerationSlider" />
+                <ui:ScrollView>
+                    <ui:TextField picking-mode="Ignore" label="Seed" value="int" name="SeedField" />
+                    <ui:Slider label="Noise Scale" high-value="1" show-input-field="true" name="NoiseScaleSlider" class="GenerationSlider" />
+                    <ui:Slider label="Amplitude" high-value="20" show-input-field="true" name="AmplitudeSlider" class="GenerationSlider" />
+                    <ui:Slider label="Frequency" high-value="0.1" show-input-field="true" name="FrequencySlider" class="GenerationSlider" />
+                    <ui:Slider label="Octaves" high-value="10" show-input-field="true" name="OctavesSlider" low-value="1" class="GenerationSlider" />
+                    <ui:Slider label="Ground Level&#10;" high-value="1" show-input-field="true" name="GroundPercentSlider" class="GenerationSlider" />
+                    <ui:Slider label="Noise Weight" high-value="10" show-input-field="true" name="NoiseWeightSlider" class="GenerationSlider" />
+                    <ui:Slider label="Weight Strength" high-value="2" show-input-field="true" name="WeightStrengthSlider" class="GenerationSlider" />
+                    <ui:Slider label="Lacunarity" high-value="3" show-input-field="true" name="LacunaritySlider" low-value="1.8" class="GenerationSlider" />
+                    <ui:Slider label="Gain" high-value="1" show-input-field="true" name="GainSlider" class="GenerationSlider" />
+                </ui:ScrollView>
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:Label tabindex="-1" text="SPACE for Generation Options" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MenuTitle" style="flex-grow: 1; position: absolute; bottom: 0;" />
     </ui:VisualElement>
 </ui:UXML>
