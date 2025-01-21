@@ -14,6 +14,16 @@ public enum NoiseType : int
     Value = 5
 }
 
+public enum FractalType : int
+{
+    None,
+    FBM,
+    Ridged,
+    Pingpong,
+    Progressive,
+    Independent
+}
+
 [RequireComponent(typeof(MeshGenerator))]
 public class NoiseGenerator : MonoBehaviour
 {
@@ -23,6 +33,7 @@ public class NoiseGenerator : MonoBehaviour
     [Space()]
     [Header("Noise Settings")]
     [SerializeField] NoiseType noiseType = NoiseType.Value;
+    [SerializeField] FractalType fractalType = FractalType.None;
     [SerializeField] int seed = 1337;
     [SerializeField] float amplitude = 5;
     [SerializeField, Range(0f, 0.1f)] float frequency = 0.02f;
@@ -37,6 +48,16 @@ public class NoiseGenerator : MonoBehaviour
         set
         {
             noiseType = value;
+            _meshGenerator.SettingsUpdated = true;
+        }
+    }
+
+    public FractalType FractalIndex
+    {
+        get { return fractalType; }
+        set
+        {
+            fractalType = value;
             _meshGenerator.SettingsUpdated = true;
         }
     }
@@ -158,6 +179,7 @@ public class NoiseGenerator : MonoBehaviour
     protected virtual void PassNoiseSettingsToShader()
     {
         NoiseShader.SetInt("_NoiseType", (int)noiseType);
+        NoiseShader.SetInt("_FractalType", (int)fractalType);
         NoiseShader.SetInt("_ChunkSize", GridMetrics.PointsPerChunk);
         NoiseShader.SetInt("_Seed", seed);
         NoiseShader.SetFloat("_Amplitude", amplitude);

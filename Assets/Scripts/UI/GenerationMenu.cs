@@ -19,6 +19,8 @@ public enum MeshType
 
 public class GenerationMenu : MonoBehaviour
 {
+    public CameraController CameraControls;
+    
     public GameObject SphereGenerator;
     public GameObject TerrainGenerator;
 
@@ -51,6 +53,7 @@ public class GenerationMenu : MonoBehaviour
 
     // Noise Options
     private EnumField _noiseTypeField;
+    private EnumField _fractalTypeField;
     private TextField _seedField;
     private Slider _noiseScaleSlider;
     private Slider _amplitudeSlider;
@@ -80,6 +83,8 @@ public class GenerationMenu : MonoBehaviour
         // Noise options
         _noiseTypeField = _rootElement.Q<EnumField>("NoiseTypeEnumField");
         _noiseTypeField.Init(NoiseType.Value);
+        _fractalTypeField = _rootElement.Q<EnumField>("FractalTypeEnumField");
+        _fractalTypeField.Init(FractalType.None);
         _seedField = _rootElement.Q<TextField>("SeedField");
         _noiseScaleSlider = _rootElement.Q<Slider>("NoiseScaleSlider");
         _amplitudeSlider = _rootElement.Q<Slider>("AmplitudeSlider");
@@ -127,6 +132,11 @@ public class GenerationMenu : MonoBehaviour
         _noiseTypeField.RegisterValueChangedCallback(evt =>
         {
             _noiseGenerator.NoiseIndex = (NoiseType)evt.newValue;
+        });
+
+        _fractalTypeField.RegisterValueChangedCallback(evt =>
+        {
+            _noiseGenerator.FractalIndex = (FractalType)evt.newValue;
         });
 
         // Noise change events
@@ -206,6 +216,7 @@ public class GenerationMenu : MonoBehaviour
             }
 
             _isPanelHidden = !_isPanelHidden;
+            CameraControls.IsActive = _isPanelHidden;
         }
     }
 
@@ -220,6 +231,7 @@ public class GenerationMenu : MonoBehaviour
 
         // Noise Options
         _noiseTypeField.value = preset.Noise;
+        _fractalTypeField.value = preset.Fractal;
         _seedField.value = preset.Seed.ToString();
         _amplitudeSlider.value = preset.Amplitude;
         _frequencySlider.value = preset.Frequency;
