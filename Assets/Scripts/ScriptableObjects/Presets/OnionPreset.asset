@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: OnionPreset
   m_EditorClassIdentifier: 
   Mesh: 0
-  IsoLevel: -0.5
+  IsoLevel: 0.7
   Noise: 0
+  Fractal: 2
   Seed: 1154
   Amplitude: 14
   Frequency: 0.06

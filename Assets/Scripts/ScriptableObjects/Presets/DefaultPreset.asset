@@ -15,6 +15,7 @@ MonoBehaviour:
   Mesh: 0
   IsoLevel: 0
   Noise: 5
+  Fractal: 2
   Seed: 0
   Amplitude: 10
   Frequency: 0

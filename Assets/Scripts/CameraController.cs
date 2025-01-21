@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public bool IsActive = false;
+    
     [SerializeField] Camera _mainCamera;
     [Tooltip("Cam distance from pivot is pointsPerChunk * this value")]
     [SerializeField] float _extraDistanceRatioFromPivot = 1.25f;
@@ -18,6 +20,11 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if (!IsActive)
+        {
+            return;
+        }
+        
         HandleCameraRotation();
     }
 

@@ -12,6 +12,7 @@
                 <ui:Label tabindex="-1" text="Noise Options" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MenuTitle" />
                 <ui:ScrollView>
                     <ui:EnumField label="Noise Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" name="NoiseTypeEnumField" />
+                    <ui:EnumField label="Fractal Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" name="FractalTypeEnumField" />
                     <ui:TextField picking-mode="Ignore" label="Seed" value="int" name="SeedField" />
                     <ui:Slider label="Noise Scale" high-value="1" show-input-field="true" name="NoiseScaleSlider" class="GenerationSlider" />
                     <ui:Slider label="Amplitude" high-value="20" show-input-field="true" name="AmplitudeSlider" class="GenerationSlider" />

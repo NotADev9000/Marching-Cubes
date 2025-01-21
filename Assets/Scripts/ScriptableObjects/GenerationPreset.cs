@@ -11,6 +11,7 @@ public class GenerationPreset : ScriptableObject
     
     // Noise
     public NoiseType Noise;
+    public FractalType Fractal;
     public int Seed;
     public float Amplitude;
     public float Frequency;
