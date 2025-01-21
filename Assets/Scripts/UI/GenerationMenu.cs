@@ -102,6 +102,26 @@ public class GenerationMenu : MonoBehaviour
         _meshTypeField.RegisterValueChangedCallback(evt =>
         {
             SetMesh((MeshType)evt.newValue);
+            
+            _meshGenerator.IsoLevel = _isoSlider.value;
+
+            _noiseGenerator.NoiseIndex = (NoiseType)_noiseTypeField.value;
+            _noiseGenerator.FractalIndex = (FractalType)_fractalTypeField.value;
+            _noiseGenerator.Seed = int.Parse(_seedField.value);
+            _noiseGenerator.Amplitude = _amplitudeSlider.value;
+            _noiseGenerator.Frequency = _frequencySlider.value;
+            _noiseGenerator.Octaves = (int)_octavesSlider.value;
+            _noiseGenerator.WeightStrength = _weightStrengthSlider.value;
+            _noiseGenerator.Lacunarity = _lacunaritySlider.value;
+            _noiseGenerator.Gain = _gainSlider.value;
+
+            if (_noiseGenerator is TerrainNoiseGenerator terrainNoiseGenerator)
+            {
+                terrainNoiseGenerator.GroundLevel = _groundPercentSlider.value;
+                terrainNoiseGenerator.NoiseWeight = _noiseWeightSlider.value;
+                terrainNoiseGenerator.NoiseScale = _noiseScaleSlider.value;
+            }
+
         });
 
         _isoSlider.RegisterValueChangedCallback((evt) =>
@@ -177,8 +197,6 @@ public class GenerationMenu : MonoBehaviour
     void Start()
     {
         // Initialise base values here
-        _presetField.value = GenerationPresetType.PerfectSphere;
-        _presetField.value = GenerationPresetType.OnionPlanet;
         _presetField.value = GenerationPresetType.PerfectSphere;
     }
 
@@ -259,7 +277,7 @@ public class GenerationMenu : MonoBehaviour
         _noiseWeightSlider.value = preset.NoiseWeight;
         _noiseScaleSlider.value = preset.NoiseScale;*/
         
-        _meshTypeField.value = preset.Mesh;
+        _meshTypeField.SetValueWithoutNotify(preset.Mesh);
         SetMesh(preset.Mesh);
 
         _isoSlider.value = preset.IsoLevel;
