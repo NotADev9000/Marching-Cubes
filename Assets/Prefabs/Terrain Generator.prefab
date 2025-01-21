@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4426365834845250550}
   - component: {fileID: 2198135871566043493}
   - component: {fileID: 99889088915692689}
-  - component: {fileID: 1712536101596798252}
+  - component: {fileID: 4961118841031549271}
   - component: {fileID: 3144256066564790993}
   m_Layer: 0
   m_Name: Terrain Generator
@@ -102,7 +102,7 @@ MonoBehaviour:
   _isoLevel: 0.5
   _drawWeights: 0
   _drawContainer: 1
---- !u!114 &1712536101596798252
+--- !u!114 &4961118841031549271
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,20 +111,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 6498425276426831626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5f6faf7dd672894a82e5e2c0be30c29, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a64c2393d42b8b4ba00b6cc99039f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   NoiseShader: {fileID: 7200000, guid: 7b48c57ec1ff3b34c919dcdd80d13227, type: 3}
   seed: 1337
-  noiseScale: 1
   amplitude: 5
   frequency: 0.02
   octaves: 8
-  groundPercent: 0.2
-  noiseWeight: 1
   weightStrength: 0
   lacunarity: 2
   gain: 0.5
+  noiseScale: 1
+  noiseWeight: 1
+  groundLevel: 0.2
 --- !u!114 &3144256066564790993
 MonoBehaviour:
   m_ObjectHideFlags: 0

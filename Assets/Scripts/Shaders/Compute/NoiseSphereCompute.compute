@@ -6,12 +6,9 @@
 RWStructuredBuffer<float> _Weights;
 
 int _Seed;
-float _NoiseScale;
 float _Amplitude;
 float _Frequency;
 int _Octaves;
-float _GroundPercent;
-float _NoiseWeight;
 float _WeightStrength;
 float _Lacunarity;
 float _Gain;
@@ -20,19 +17,19 @@ float _Gain;
 void GenerateNoise(uint3 id : SV_DispatchThreadID)
 {
     fnl_state noise = fnlCreateState();
-    noise.noise_type = FNL_NOISE_OPENSIMPLEX2;
+    noise.noise_type = FNL_NOISE_VALUE;
     noise.fractal_type = FNL_FRACTAL_RIDGED;
     noise.seed = _Seed;
     noise.frequency = _Frequency;
     noise.octaves = _Octaves;
-    noise.lacunarity = _Lacunarity;
-    noise.gain = _Gain;
     noise.weighted_strength = _WeightStrength;
     noise.ping_pong_strength = _WeightStrength;
+    noise.lacunarity = _Lacunarity;
+    noise.gain = _Gain;
 
     //SPHERE
-    float3 pos = id * _NoiseScale * 1 - _ChunkSize/2;
-    float radiusAndLength = 1 - length(pos);
+    float3 pos = id * 1.0 - _ChunkSize/2.0; // make sure to divide by a float! Otherwise it'll break sphere
+    float radiusAndLength = 1.0 - length(pos);
     float n = radiusAndLength + fnlGetNoise3D(noise, pos.x, pos.y, pos.z) * _Amplitude;
     _Weights[indexFromCoord(id.x, id.y, id.z)] = n;
 }

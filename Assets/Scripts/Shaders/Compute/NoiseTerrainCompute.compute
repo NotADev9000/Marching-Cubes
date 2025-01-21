@@ -6,15 +6,15 @@
 RWStructuredBuffer<float> _Weights;
 
 int _Seed;
-float _NoiseScale;
 float _Amplitude;
 float _Frequency;
 int _Octaves;
-float _GroundPercent;
-float _NoiseWeight;
 float _WeightStrength;
 float _Lacunarity;
 float _Gain;
+float _NoiseScale;
+float _NoiseWeight;
+float _GroundLevel;
 
 [numthreads(numThreads, numThreads, numThreads)]
 void GenerateNoise(uint3 id : SV_DispatchThreadID)
@@ -25,15 +25,15 @@ void GenerateNoise(uint3 id : SV_DispatchThreadID)
     noise.seed = _Seed;
     noise.frequency = _Frequency;
     noise.octaves = _Octaves;
-    noise.lacunarity = _Lacunarity;
-    noise.gain = _Gain;
     noise.weighted_strength = _WeightStrength;
     noise.ping_pong_strength = _WeightStrength;
+    noise.lacunarity = _Lacunarity;
+    noise.gain = _Gain;
 
-    // PLANE
+    // TERRAIN
     // don't scale y value to prevent the mesh moving up and down
     float3 pos = float3(id.x * _NoiseScale, id.y, id.z * _NoiseScale);
-    float ground = -pos.y + (_GroundPercent * _ChunkSize);
+    float ground = -pos.y + (_GroundLevel * _ChunkSize);
     float n = ground + fnlGetNoise3D(noise, pos.x, pos.y, pos.z) * _Amplitude;
     n *= _NoiseWeight;
     n = sign(n) * pow(abs(n), 2);
