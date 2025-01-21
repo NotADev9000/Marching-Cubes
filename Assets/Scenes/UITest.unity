@@ -198,10 +198,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Terrain Generator
       objectReference: {fileID: 0}
-    - target: {fileID: 6498425276426831626, guid: 2fffa5e0632d372409d914e69f6f2dec, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8964319362638559529, guid: 2fffa5e0632d372409d914e69f6f2dec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -374,10 +370,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sphere Generator
       objectReference: {fileID: 0}
-    - target: {fileID: 6498425276426831626, guid: 8fb4321c0138d6747bc08081ca2bd2dd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8964319362638559529, guid: 8fb4321c0138d6747bc08081ca2bd2dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -491,6 +483,10 @@ MonoBehaviour:
   Presets:
   - {fileID: 11400000, guid: 1c3b13e18d93f584db4ce717342a6e5a, type: 2}
   - {fileID: 11400000, guid: c5434242ef540ab4590a03c15e513a01, type: 2}
+  - {fileID: 11400000, guid: 7ca7a715d49ca10488f48043827d39c8, type: 2}
+  - {fileID: 11400000, guid: 4fb9bcb727c016344a58ebe295870750, type: 2}
+  - {fileID: 11400000, guid: 120ac163916ebb3408436c1939bff9ce, type: 2}
+  - {fileID: 11400000, guid: fced2970f5409f3468994ff2da0ed635, type: 2}
   - {fileID: 11400000, guid: bfe7ab521b522a3478f76ef4d7115fec, type: 2}
 --- !u!1001 &516381639002807467
 PrefabInstance:

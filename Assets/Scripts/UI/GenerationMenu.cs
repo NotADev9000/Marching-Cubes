@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,7 +6,11 @@ public enum GenerationPresetType : int
 {
     PerfectSphere,
     OnionPlanet,
-    FloatingIslands
+    DicePlanet,
+    ShavedMeteor,
+    Plains,
+    PeaksNValleys,
+    FloatingIslands,
 }
 
 public enum MeshType
@@ -20,7 +22,7 @@ public enum MeshType
 public class GenerationMenu : MonoBehaviour
 {
     public CameraController CameraControls;
-    
+
     public GameObject SphereGenerator;
     public GameObject TerrainGenerator;
 
@@ -102,7 +104,7 @@ public class GenerationMenu : MonoBehaviour
         _meshTypeField.RegisterValueChangedCallback(evt =>
         {
             SetMesh((MeshType)evt.newValue);
-            
+
             _meshGenerator.IsoLevel = _isoSlider.value;
 
             _noiseGenerator.NoiseIndex = (NoiseType)_noiseTypeField.value;
@@ -242,7 +244,7 @@ public class GenerationMenu : MonoBehaviour
                 break;
         }
     }
-    
+
     private void PresetChangeEvent(ChangeEvent<Enum> presetEnum)
     {
         SetPreset((int)(GenerationPresetType)presetEnum.newValue);
@@ -276,7 +278,7 @@ public class GenerationMenu : MonoBehaviour
         _groundPercentSlider.value = preset.GroundLevel;
         _noiseWeightSlider.value = preset.NoiseWeight;
         _noiseScaleSlider.value = preset.NoiseScale;*/
-        
+
         _meshTypeField.SetValueWithoutNotify(preset.Mesh);
         SetMesh(preset.Mesh);
 
