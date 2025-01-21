@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e7486d22f86ee40b0a3dcc57001826, type: 3}
+  m_Name: PeaksValleysPreset
+  m_EditorClassIdentifier: 
+  Mesh: 1
+  IsoLevel: -0.5
+  Noise: 0
+  Fractal: 1
+  Seed: 4
+  Amplitude: 10.05
+  Frequency: 0.0244
+  Octaves: 1
+  WeightStrength: 0
+  Lacunarity: 0
+  Gain: 0
+  NoiseScale: 4
+  NoiseWeight: 0.2
+  GroundLevel: 0.275

@@ -6,7 +6,7 @@
                 <ui:Label tabindex="-1" text="Mesh Options" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MenuTitle" />
                 <ui:EnumField label="Preset" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" name="PresetEnumField" />
                 <ui:EnumField label="Mesh Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" name="MeshTypeEnumField" />
-                <ui:Slider label="Iso Level&#10;" high-value="5" show-input-field="true" name="IsoLevelSlider" low-value="-5" class="GenerationSlider" />
+                <ui:Slider label="Iso Level&#10;" high-value="5" show-input-field="true" name="IsoLevelSlider" low-value="-15" class="GenerationSlider" />
             </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 1; flex-shrink: 0;">
                 <ui:Label tabindex="-1" text="Noise Options" parse-escape-sequences="true" display-tooltip-when-elided="true" class="MenuTitle" />
@@ -14,14 +14,14 @@
                     <ui:EnumField label="Noise Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" name="NoiseTypeEnumField" />
                     <ui:EnumField label="Fractal Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" name="FractalTypeEnumField" />
                     <ui:TextField picking-mode="Ignore" label="Seed" value="int" name="SeedField" />
-                    <ui:Slider label="Noise Scale" high-value="1" show-input-field="true" name="NoiseScaleSlider" class="GenerationSlider" />
+                    <ui:Slider label="Noise Scale" high-value="4" show-input-field="true" name="NoiseScaleSlider" class="GenerationSlider" />
                     <ui:Slider label="Amplitude" high-value="20" show-input-field="true" name="AmplitudeSlider" class="GenerationSlider" />
                     <ui:Slider label="Frequency" high-value="0.1" show-input-field="true" name="FrequencySlider" class="GenerationSlider" />
                     <ui:Slider label="Octaves" high-value="10" show-input-field="true" name="OctavesSlider" low-value="1" class="GenerationSlider" />
                     <ui:Slider label="Ground Level&#10;" high-value="1" show-input-field="true" name="GroundPercentSlider" class="GenerationSlider" />
                     <ui:Slider label="Noise Weight" high-value="10" show-input-field="true" name="NoiseWeightSlider" class="GenerationSlider" />
                     <ui:Slider label="Weight Strength" high-value="2" show-input-field="true" name="WeightStrengthSlider" low-value="-2" class="GenerationSlider" />
-                    <ui:Slider label="Lacunarity" high-value="3" show-input-field="true" name="LacunaritySlider" low-value="1.8" class="GenerationSlider" />
+                    <ui:Slider label="Lacunarity" high-value="3" show-input-field="true" name="LacunaritySlider" low-value="0" class="GenerationSlider" />
                     <ui:Slider label="Gain" high-value="1" show-input-field="true" name="GainSlider" class="GenerationSlider" />
                 </ui:ScrollView>
             </ui:VisualElement>
