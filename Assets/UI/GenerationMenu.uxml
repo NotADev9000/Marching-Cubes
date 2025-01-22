@@ -14,7 +14,7 @@
                     <ui:EnumField label="Noise Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" name="NoiseTypeEnumField" />
                     <ui:EnumField label="Fractal Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" name="FractalTypeEnumField" />
                     <ui:TextField picking-mode="Ignore" label="Seed" value="int" name="SeedField" />
-                    <ui:Slider label="Noise Scale" high-value="4" show-input-field="true" name="NoiseScaleSlider" class="GenerationSlider" />
+                    <ui:Slider label="Noise Scale" high-value="4" show-input-field="true" name="NoiseScaleSlider" inverted="false" class="GenerationSlider" />
                     <ui:Slider label="Amplitude" high-value="20" show-input-field="true" name="AmplitudeSlider" class="GenerationSlider" />
                     <ui:Slider label="Frequency" high-value="0.1" show-input-field="true" name="FrequencySlider" class="GenerationSlider" />
                     <ui:Slider label="Octaves" high-value="10" show-input-field="true" name="OctavesSlider" low-value="1" class="GenerationSlider" />

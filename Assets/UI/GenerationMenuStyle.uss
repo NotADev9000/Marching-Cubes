@@ -26,3 +26,7 @@ EnumField Label {
     -unity-text-align: upper-center;
     -unity-font-style: bold;
 }
+
+Slider TextField {
+    min-width: 100px;
+}
