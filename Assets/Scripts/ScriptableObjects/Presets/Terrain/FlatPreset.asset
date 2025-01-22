@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e7486d22f86ee40b0a3dcc57001826, type: 3}
   m_Name: FlatPreset
   m_EditorClassIdentifier: 
-  Mesh: 0
+  Mesh: 1
   IsoLevel: 0
   Noise: 0
   Fractal: 0
@@ -24,5 +24,5 @@ MonoBehaviour:
   Lacunarity: 0
   Gain: 0
   NoiseScale: 0
-  NoiseWeight: 0
+  NoiseWeight: 1
   GroundLevel: 0
