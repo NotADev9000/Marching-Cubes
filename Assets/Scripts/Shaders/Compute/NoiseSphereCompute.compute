@@ -30,7 +30,7 @@ void GenerateNoise(uint3 id : SV_DispatchThreadID)
     noise.gain = _Gain;
 
     //SPHERE
-    float3 pos = id * 1.0 - _ChunkSize/2.0; // make sure to divide by a float! Otherwise it'll break sphere
+    float3 pos = id - _ChunkSize/2.0; // make sure to divide by a float! Otherwise it'll break sphere
     float radiusAndLength = 1.0 - length(pos);
     float n = radiusAndLength + fnlGetNoise3D(noise, pos.x, pos.y, pos.z) * _Amplitude;
     _Weights[indexFromCoord(id.x, id.y, id.z)] = n;
