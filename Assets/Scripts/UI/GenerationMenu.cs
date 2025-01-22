@@ -8,6 +8,7 @@ public enum GenerationPresetType : int
     OnionPlanet,
     DicePlanet,
     ShavedMeteor,
+    FlatTerrain,
     Plains,
     PeaksNValleys,
     FloatingIslands,
