@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32e7486d22f86ee40b0a3dcc57001826, type: 3}
-  m_Name: ResetPreset
+  m_Name: PerfectSpherePreset
   m_EditorClassIdentifier: 
   Mesh: 0
   IsoLevel: 0
-  Noise: 2
-  Fractal: 5
-  Seed: 178
-  Amplitude: 44.75
-  Frequency: 11.17
-  Octaves: 313
-  WeightStrength: 18.8
-  Lacunarity: 7.69
-  Gain: 3.25
-  NoiseScale: 10.88
-  NoiseWeight: 12.57
-  GroundLevel: 22.89
+  Noise: 5
+  Fractal: 2
+  Seed: 0
+  Amplitude: 10
+  Frequency: 0
+  Octaves: 0
+  WeightStrength: 0
+  Lacunarity: 0
+  Gain: 0
+  NoiseScale: 0
+  NoiseWeight: 0
+  GroundLevel: 0

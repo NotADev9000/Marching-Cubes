@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2736903643684062011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3813626357757474973}
+  - component: {fileID: 8560330551104059825}
+  - component: {fileID: 5440648558823174004}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3813626357757474973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2736903643684062011}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8560330551104059825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2736903643684062011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 5e5cab7176799c9498c4b66b996573f2, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: a760eec4eafb3e94c82335d0190e8a35, type: 3}
+  m_SortingOrder: 0
+--- !u!114 &5440648558823174004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2736903643684062011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb47841a1ea11640a092c6f2d248028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraControls: {fileID: 0}
+  SphereGenerator: {fileID: 0}
+  TerrainGenerator: {fileID: 0}
+  _currentGenerator: {fileID: 0}
+  Presets:
+  - {fileID: 11400000, guid: 1c3b13e18d93f584db4ce717342a6e5a, type: 2}
+  - {fileID: 11400000, guid: c5434242ef540ab4590a03c15e513a01, type: 2}
+  - {fileID: 11400000, guid: 7ca7a715d49ca10488f48043827d39c8, type: 2}
+  - {fileID: 11400000, guid: 4fb9bcb727c016344a58ebe295870750, type: 2}
+  - {fileID: 11400000, guid: 13420a9363ba0bf4297047e1ed5f449c, type: 2}
+  - {fileID: 11400000, guid: 120ac163916ebb3408436c1939bff9ce, type: 2}
+  - {fileID: 11400000, guid: fced2970f5409f3468994ff2da0ed635, type: 2}
+  - {fileID: 11400000, guid: bfe7ab521b522a3478f76ef4d7115fec, type: 2}
