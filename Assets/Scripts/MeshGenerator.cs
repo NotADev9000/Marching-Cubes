@@ -73,14 +73,16 @@ public class MeshGenerator : MonoBehaviour
             Execute();
             SettingsUpdated = false;
         }
-        
+
     }
 
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (EditorApplication.isPlaying)
             SettingsUpdated = true;
     }
+#endif
 
     public void Execute()
     {

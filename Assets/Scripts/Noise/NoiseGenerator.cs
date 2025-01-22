@@ -150,13 +150,13 @@ public class NoiseGenerator : MonoBehaviour
         ReleaseBuffers();
     }
 
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (EditorApplication.isPlaying && _meshGenerator != null)
-        {
             _meshGenerator.SettingsUpdated = true;
-        }
     }
+#endif
 
     public float[] GetNoise()
     {
